@@ -1,1 +1,1 @@
-# MinyeZhou429.github.io
+# BST260 Final Project: Car Price Prediction Models
