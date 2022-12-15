@@ -120,4 +120,9 @@ The calculated R-square are:
 There is no big difference between the R-square on training set and R-square on testing set. The small difference indicates there is no over-fitting issue on random forest model.
 
 Based on the IncNodePurity values, enginesize, curbweight, and horsepower are the most significant variables for the Random Forest model.
-![RF_importance](https://github.com/MinyeZhou429/MinyeZhou429.github.io/blob/main/截屏2022-12-14%20下午3.22.36.png)
+![RF_importance](https://github.com/MinyeZhou429/MinyeZhou429.github.io/blob/main/截屏2022-12-14%20下午3.24.20.png)
+
+### Regression Tree
+
+A regression tree was fitted to see whether better performance could be obtained. Here is the visualization of Regression tree:
+![tree](https://github.com/MinyeZhou429/MinyeZhou429.github.io/blob/main/截屏2022-12-14%20下午3.24.20.png)
