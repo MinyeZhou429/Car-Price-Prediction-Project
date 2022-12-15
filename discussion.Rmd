@@ -1,0 +1,16 @@
+### Main Finding
+
+-   enginesize is the most powerful predictor for car price
+-   Random Forest model has the best performance based on the R-square
+-   parametric models are preferred for this dataset
+
+### Limitation
+
+-   Excluding categorical data may decrease the model performance since they could provide some important information like car body, drive wheel, and engine type
+-   Small testing set size may potentially cause the large difference of R-square between testing set and training set
+
+### Future Direction
+
+-   car price could be transformed into categorical variable so that classification algorithms could be applied
+-   Perform feature engineering
+-   The model could be tested on larger dataset to increase its generalizability

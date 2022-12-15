@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+<meta name="date" content="2022-12-09" />
+
+<title>Project</title>
+
+<script src="site_libs/header-attrs-2.18/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">BST260 Final Project: Car Price Prediction Models</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="intro.html">Introduction</a>
+</li>
+<li>
+  <a href="method.html">Method</a>
+</li>
+<li>
+  <a href="result.html">Result</a>
+</li>
+<li>
+  <a href="discussion.html">Discussion</a>
+</li>
+<li>
+  <a href="reference.html">Reference</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Project</h1>
+<h4 class="date">2022-12-09</h4>
+
+</div>
+
+
+<pre class="r"><code>knitr::opts_chunk$set(echo = FALSE)
+library(car)
+library(readr)
+library(reshape2)
+library(ggplot2)
+library(caret)
+library(car)
+library(MLmetrics)
+library(glmnet)
+library(rpart)
+library(randomForest)
+library(tidyverse)
+library(dplyr)
+CarPrice&lt;- read_csv(&quot;/Users/yeye/Desktop/FALL22/BST260/archive/CarPrice_Assignment.csv&quot;)
+CarPrice &lt;- select(CarPrice,-car_ID)
+#check missingness
+sapply(CarPrice, function(x) sum(is.na(x)))
+#check distribution of car price
+summary(CarPrice$price)
+#check variable type
+sapply(CarPrice, class)
+#get all numeric columns
+num_cols &lt;- unlist(lapply(CarPrice, is.numeric)) 
+numeric_data &lt;- CarPrice[ , num_cols] 
+#heatmap for numeric variables
+corr_mat &lt;- round(cor(numeric_data),2) 
+melted_cormat &lt;- melt(corr_mat)
+head(melted_cormat)
+#heatmap for all numeric variables
+ggplot(data = melted_cormat, aes(x=Var1, y=Var2, fill=value)) + 
+  geom_tile()+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  geom_text(aes(Var2, Var1, label = value), color = &quot;black&quot;, size = 2)
+summary(CarPrice$price)
+x &lt;- select(CarPrice,-price)
+y &lt;- select(CarPrice,price)
+#splitting dataset
+test_index &lt;- createDataPartition(CarPrice$price, times = 1, p = 0.2, list = FALSE)
+train_x &lt;- x[-test_index,]
+train_y &lt;- y[-test_index,]
+test_x &lt;- x[test_index,]
+test_y &lt;- y[test_index,]
+
+test_all &lt;- CarPrice[test_index,]
+train_all &lt;- CarPrice[-test_index,]
+#linear regression for all numerical variables
+numeric_train &lt;- train_all[ , num_cols] 
+numeric_test &lt;- test_all[ , num_cols] 
+linear_mod &lt;- lm(price ~ ., data = numeric_train)
+summary(linear_mod)
+linear_imp &lt;- varImp(linear_mod, scale = FALSE)
+# model tune
+linear_mod2 &lt;- lm(price ~ peakrpm + compressionratio + stroke + enginesize + carlength + wheelbase, data = numeric_train)
+summary(linear_mod)
+anova(linear_mod,linear_mod2,test=&quot;Chisq&quot;)
+numeric_test_noy &lt;- select(numeric_test,-price)
+linear_predict &lt;- predict(linear_mod, numeric_test_noy)
+#define calculation of r-squared and mape
+RSQUARE = function(y_actual,y_predict){
+  cor(y_actual,y_predict)^2
+}
+
+MAPE = function(y_actual,y_predict){
+  mean(abs((y_actual-y_predict)/y_actual))*100
+}
+LR_MAPE = MAPE(numeric_test$price,linear_predict) # Using MAPE error metrics to check for the error rate and accuracy level
+LR_R = RSQUARE(numeric_test$price,linear_predict) # Using R-SQUARE error metrics to check for the error rate and accuracy level
+Accuracy_Linear = 100 - LR_MAPE
+LR_R
+LR_MAPE
+Accuracy_Linear
+sqrt(mean((linear_predict - numeric_test$price)^2,na.rm = TRUE))
+# multicollinearity
+vif_values &lt;- vif(linear_mod)
+barplot(vif_values, main = &quot;VIF Values&quot;, horiz = TRUE, col = &quot;steelblue&quot;,las=2)
+abline(v = 5, lwd = 3, lty = 2)
+#lasso
+numeric_train_noy &lt;- select(numeric_train,-price)
+cv_model &lt;- cv.glmnet(as.matrix(numeric_train_noy), numeric_train$price, alpha = 1)
+best_lambda &lt;- cv_model$lambda.min
+best_lambda
+plot(cv_model) 
+best_model &lt;- glmnet(numeric_train_noy, numeric_train$price, alpha = 1, lambda = best_lambda)
+y_predicted &lt;- predict(best_model, s = best_lambda, newx = as.matrix(numeric_train_noy))
+sst &lt;- sum((numeric_train$price - mean(numeric_train$price))^2)
+sse &lt;- sum((y_predicted - numeric_train$price)^2)
+rsq &lt;- 1 - sse/sst
+rsq
+# on testing dataset
+y_predicted_test &lt;- predict(best_model, s = best_lambda, newx = as.matrix(numeric_test_noy))
+sst2 &lt;- sum((numeric_test$price - mean(numeric_test$price))^2)
+sse2 &lt;- sum((y_predicted_test - numeric_test$price)^2)
+rsq2 &lt;- 1 - sse2/sst2
+rsq2
+#random forest
+rf_fit &lt;- randomForest(price~., data = numeric_train) 
+rf_fit
+plot(rf_fit)
+rf_predict &lt;- predict(rf_fit, numeric_test_noy)
+
+sst3 &lt;- sum((numeric_test$price - mean(numeric_test$price))^2)
+sse3 &lt;- sum((rf_predict - numeric_test$price)^2)
+rsq3 &lt;- 1 - sse3/sst3
+rsq3
+varImpPlot(rf_fit) 
+#regression trees
+tree_fit &lt;- rpart(price~., data = numeric_train) 
+plot(tree_fit, margin = 0.1)
+text(tree_fit, cex = 0.75)
+tree_predict &lt;- predict(tree_fit,numeric_test_noy)
+sst4 &lt;- sum((numeric_test$price - mean(numeric_test$price))^2)
+sse4 &lt;- sum((tree_predict - numeric_test$price)^2)
+rsq4 &lt;- 1 - sse4/sst4
+rsq4
+tree_predict2 &lt;- predict(tree_fit,numeric_train_noy)
+sst5 &lt;- sum((numeric_train$price - mean(numeric_train$price))^2)
+sse5 &lt;- sum((tree_predict2 - numeric_train$price)^2)
+rsq5 &lt;- 1 - sse5/sst5
+rsq5</code></pre>
+<pre class="r"><code>library(car)
+library(readr)
+library(reshape2)
+library(ggplot2)
+library(caret)
+library(car)
+library(MLmetrics)
+library(glmnet)
+library(rpart)
+library(randomForest)
+library(tidyverse)
+library(dplyr)</code></pre>
+<p>##load data</p>
+<pre class="r"><code>CarPrice&lt;- read_csv(&quot;/Users/yeye/Desktop/FALL22/BST260/archive/CarPrice_Assignment.csv&quot;)</code></pre>
+<pre><code>## Rows: 205 Columns: 26
+## ── Column specification ───────────────────────────────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (10): CarName, fueltype, aspiration, doornumber, carbody, drivewheel, enginelocation, enginetype, c...
+## dbl (16): car_ID, symboling, wheelbase, carlength, carwidth, carheight, curbweight, enginesize, borerat...
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>CarPrice &lt;- select(CarPrice,-car_ID)</code></pre>
+<pre class="r"><code>#check missingness
+sapply(CarPrice, function(x) sum(is.na(x)))</code></pre>
+<pre><code>##        symboling          CarName         fueltype       aspiration       doornumber          carbody 
+##                0                0                0                0                0                0 
+##       drivewheel   enginelocation        wheelbase        carlength         carwidth        carheight 
+##                0                0                0                0                0                0 
+##       curbweight       enginetype   cylindernumber       enginesize       fuelsystem        boreratio 
+##                0                0                0                0                0                0 
+##           stroke compressionratio       horsepower          peakrpm          citympg       highwaympg 
+##                0                0                0                0                0                0 
+##            price 
+##                0</code></pre>
+<pre class="r"><code>knitr::opts_chunk$set(echo = FALSE)
+library(car)
+library(readr)
+library(reshape2)
+library(ggplot2)
+library(caret)
+library(car)
+library(MLmetrics)
+library(glmnet)
+library(rpart)
+library(randomForest)
+library(tidyverse)
+library(dplyr)
+CarPrice&lt;- read_csv(&quot;/Users/yeye/Desktop/FALL22/BST260/archive/CarPrice_Assignment.csv&quot;)
+CarPrice &lt;- select(CarPrice,-car_ID)
+#check missingness
+sapply(CarPrice, function(x) sum(is.na(x)))
+#check distribution of car price
+summary(CarPrice$price)
+#check variable type
+sapply(CarPrice, class)
+#get all numeric columns
+num_cols &lt;- unlist(lapply(CarPrice, is.numeric)) 
+numeric_data &lt;- CarPrice[ , num_cols] 
+#heatmap for numeric variables
+corr_mat &lt;- round(cor(numeric_data),2) 
+melted_cormat &lt;- melt(corr_mat)
+head(melted_cormat)
+#heatmap for all numeric variables
+ggplot(data = melted_cormat, aes(x=Var1, y=Var2, fill=value)) + 
+  geom_tile()+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  geom_text(aes(Var2, Var1, label = value), color = &quot;black&quot;, size = 2)
+summary(CarPrice$price)
+x &lt;- select(CarPrice,-price)
+y &lt;- select(CarPrice,price)
+#splitting dataset
+test_index &lt;- createDataPartition(CarPrice$price, times = 1, p = 0.2, list = FALSE)
+train_x &lt;- x[-test_index,]
+train_y &lt;- y[-test_index,]
+test_x &lt;- x[test_index,]
+test_y &lt;- y[test_index,]
+
+test_all &lt;- CarPrice[test_index,]
+train_all &lt;- CarPrice[-test_index,]
+#linear regression for all numerical variables
+numeric_train &lt;- train_all[ , num_cols] 
+numeric_test &lt;- test_all[ , num_cols] 
+linear_mod &lt;- lm(price ~ ., data = numeric_train)
+summary(linear_mod)
+linear_imp &lt;- varImp(linear_mod, scale = FALSE)
+# model tune
+linear_mod2 &lt;- lm(price ~ peakrpm + compressionratio + stroke + enginesize + carlength + wheelbase, data = numeric_train)
+summary(linear_mod)
+anova(linear_mod,linear_mod2,test=&quot;Chisq&quot;)
+numeric_test_noy &lt;- select(numeric_test,-price)
+linear_predict &lt;- predict(linear_mod, numeric_test_noy)
+#define calculation of r-squared and mape
+RSQUARE = function(y_actual,y_predict){
+  cor(y_actual,y_predict)^2
+}
+
+MAPE = function(y_actual,y_predict){
+  mean(abs((y_actual-y_predict)/y_actual))*100
+}
+LR_MAPE = MAPE(numeric_test$price,linear_predict) # Using MAPE error metrics to check for the error rate and accuracy level
+LR_R = RSQUARE(numeric_test$price,linear_predict) # Using R-SQUARE error metrics to check for the error rate and accuracy level
+Accuracy_Linear = 100 - LR_MAPE
+LR_R
+LR_MAPE
+Accuracy_Linear
+sqrt(mean((linear_predict - numeric_test$price)^2,na.rm = TRUE))
+# multicollinearity
+vif_values &lt;- vif(linear_mod)
+barplot(vif_values, main = &quot;VIF Values&quot;, horiz = TRUE, col = &quot;steelblue&quot;,las=2)
+abline(v = 5, lwd = 3, lty = 2)
+#lasso
+numeric_train_noy &lt;- select(numeric_train,-price)
+cv_model &lt;- cv.glmnet(as.matrix(numeric_train_noy), numeric_train$price, alpha = 1)
+best_lambda &lt;- cv_model$lambda.min
+best_lambda
+plot(cv_model) 
+best_model &lt;- glmnet(numeric_train_noy, numeric_train$price, alpha = 1, lambda = best_lambda)
+y_predicted &lt;- predict(best_model, s = best_lambda, newx = as.matrix(numeric_train_noy))
+sst &lt;- sum((numeric_train$price - mean(numeric_train$price))^2)
+sse &lt;- sum((y_predicted - numeric_train$price)^2)
+rsq &lt;- 1 - sse/sst
+rsq
+# on testing dataset
+y_predicted_test &lt;- predict(best_model, s = best_lambda, newx = as.matrix(numeric_test_noy))
+sst2 &lt;- sum((numeric_test$price - mean(numeric_test$price))^2)
+sse2 &lt;- sum((y_predicted_test - numeric_test$price)^2)
+rsq2 &lt;- 1 - sse2/sst2
+rsq2
+#random forest
+rf_fit &lt;- randomForest(price~., data = numeric_train) 
+rf_fit
+plot(rf_fit)
+rf_predict &lt;- predict(rf_fit, numeric_test_noy)
+
+sst3 &lt;- sum((numeric_test$price - mean(numeric_test$price))^2)
+sse3 &lt;- sum((rf_predict - numeric_test$price)^2)
+rsq3 &lt;- 1 - sse3/sst3
+rsq3
+varImpPlot(rf_fit) 
+#regression trees
+tree_fit &lt;- rpart(price~., data = numeric_train) 
+plot(tree_fit, margin = 0.1)
+text(tree_fit, cex = 0.75)
+tree_predict &lt;- predict(tree_fit,numeric_test_noy)
+sst4 &lt;- sum((numeric_test$price - mean(numeric_test$price))^2)
+sse4 &lt;- sum((tree_predict - numeric_test$price)^2)
+rsq4 &lt;- 1 - sse4/sst4
+rsq4
+tree_predict2 &lt;- predict(tree_fit,numeric_train_noy)
+sst5 &lt;- sum((numeric_train$price - mean(numeric_train$price))^2)
+sse5 &lt;- sum((tree_predict2 - numeric_train$price)^2)
+rsq5 &lt;- 1 - sse5/sst5
+rsq5</code></pre>
+<pre class="r"><code>#check variable type
+sapply(CarPrice, class)</code></pre>
+<pre><code>##        symboling          CarName         fueltype       aspiration       doornumber          carbody 
+##        &quot;numeric&quot;      &quot;character&quot;      &quot;character&quot;      &quot;character&quot;      &quot;character&quot;      &quot;character&quot; 
+##       drivewheel   enginelocation        wheelbase        carlength         carwidth        carheight 
+##      &quot;character&quot;      &quot;character&quot;        &quot;numeric&quot;        &quot;numeric&quot;        &quot;numeric&quot;        &quot;numeric&quot; 
+##       curbweight       enginetype   cylindernumber       enginesize       fuelsystem        boreratio 
+##        &quot;numeric&quot;      &quot;character&quot;      &quot;character&quot;        &quot;numeric&quot;      &quot;character&quot;        &quot;numeric&quot; 
+##           stroke compressionratio       horsepower          peakrpm          citympg       highwaympg 
+##        &quot;numeric&quot;        &quot;numeric&quot;        &quot;numeric&quot;        &quot;numeric&quot;        &quot;numeric&quot;        &quot;numeric&quot; 
+##            price 
+##        &quot;numeric&quot;</code></pre>
+<pre class="r"><code>#get all numeric columns
+num_cols &lt;- unlist(lapply(CarPrice, is.numeric)) 
+numeric_data &lt;- CarPrice[ , num_cols] </code></pre>
+<pre class="r"><code>#heatmap for numeric variables
+corr_mat &lt;- round(cor(numeric_data),2) 
+melted_cormat &lt;- melt(corr_mat)
+head(melted_cormat)</code></pre>
+<pre><code>##         Var1      Var2 value
+## 1  symboling symboling  1.00
+## 2  wheelbase symboling -0.53
+## 3  carlength symboling -0.36
+## 4   carwidth symboling -0.23
+## 5  carheight symboling -0.54
+## 6 curbweight symboling -0.23</code></pre>
+<pre class="r"><code>#heatmap for all numeric variables
+ggplot(data = melted_cormat, aes(x=Var1, y=Var2, fill=value)) + 
+  geom_tile()+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  geom_text(aes(Var2, Var1, label = value), color = &quot;black&quot;, size = 2)</code></pre>
+<p><img src="final-project_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+## comment It is noticed that among numeric variables: wheelbase have
+positive correlation with price of 58%. car length and car width have
+positive correlation with price of 68% and 76%. curbweight have positive
+correlation with price of 84%. enginesize have positive correlation with
+price of 87%. boreratio have positive correlation with price of 55%.
+horsepower have positive correlation with price of 81%. citympg and
+highwaympg have negative correlation with price of 69% and 70%.</p>
+<pre class="r"><code>summary(CarPrice$price)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    5118    7788   10295   13277   16503   45400</code></pre>
+<pre class="r"><code>x &lt;- select(CarPrice,-price)
+y &lt;- select(CarPrice,price)</code></pre>
+<pre class="r"><code>#splitting dataset
+test_index &lt;- createDataPartition(CarPrice$price, times = 1, p = 0.2, list = FALSE)
+train_x &lt;- x[-test_index,]
+train_y &lt;- y[-test_index,]
+test_x &lt;- x[test_index,]
+test_y &lt;- y[test_index,]
+
+test_all &lt;- CarPrice[test_index,]
+train_all &lt;- CarPrice[-test_index,]</code></pre>
+<pre class="r"><code>#linear regression for all numerical variables
+numeric_train &lt;- train_all[ , num_cols] 
+numeric_test &lt;- test_all[ , num_cols] 
+linear_mod &lt;- lm(price ~ ., data = numeric_train)
+summary(linear_mod)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = price ~ ., data = numeric_train)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -9336.0 -1471.1  -171.3  1506.5  8875.1 
+## 
+## Coefficients:
+##                    Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)      -4.174e+04  1.676e+04  -2.491  0.01386 *  
+## symboling         2.949e+02  2.626e+02   1.123  0.26319    
+## wheelbase         1.096e+02  1.110e+02   0.988  0.32495    
+## carlength        -6.589e+01  5.791e+01  -1.138  0.25709    
+## carwidth          5.353e+02  2.484e+02   2.155  0.03280 *  
+## carheight         1.329e+02  1.412e+02   0.941  0.34818    
+## curbweight        1.283e+00  1.709e+00   0.751  0.45383    
+## enginesize        1.351e+02  1.438e+01   9.398  &lt; 2e-16 ***
+## boreratio        -2.787e+03  1.443e+03  -1.932  0.05532 .  
+## stroke           -4.560e+03  9.455e+02  -4.823 3.52e-06 ***
+## compressionratio  3.573e+02  8.332e+01   4.289 3.25e-05 ***
+## horsepower        2.840e+01  1.664e+01   1.706  0.09011 .  
+## peakrpm           2.349e+00  7.014e-01   3.349  0.00103 ** 
+## citympg          -2.659e+02  1.930e+02  -1.377  0.17049    
+## highwaympg        1.556e+02  1.700e+02   0.915  0.36146    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2922 on 146 degrees of freedom
+## Multiple R-squared:  0.876,  Adjusted R-squared:  0.8641 
+## F-statistic: 73.69 on 14 and 146 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre class="r"><code>linear_imp &lt;- varImp(linear_mod, scale = FALSE)</code></pre>
+<pre class="r"><code># model tune
+linear_mod2 &lt;- lm(price ~ peakrpm + compressionratio + stroke + enginesize + carlength + wheelbase, data = numeric_train)
+summary(linear_mod)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = price ~ ., data = numeric_train)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -9336.0 -1471.1  -171.3  1506.5  8875.1 
+## 
+## Coefficients:
+##                    Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)      -4.174e+04  1.676e+04  -2.491  0.01386 *  
+## symboling         2.949e+02  2.626e+02   1.123  0.26319    
+## wheelbase         1.096e+02  1.110e+02   0.988  0.32495    
+## carlength        -6.589e+01  5.791e+01  -1.138  0.25709    
+## carwidth          5.353e+02  2.484e+02   2.155  0.03280 *  
+## carheight         1.329e+02  1.412e+02   0.941  0.34818    
+## curbweight        1.283e+00  1.709e+00   0.751  0.45383    
+## enginesize        1.351e+02  1.438e+01   9.398  &lt; 2e-16 ***
+## boreratio        -2.787e+03  1.443e+03  -1.932  0.05532 .  
+## stroke           -4.560e+03  9.455e+02  -4.823 3.52e-06 ***
+## compressionratio  3.573e+02  8.332e+01   4.289 3.25e-05 ***
+## horsepower        2.840e+01  1.664e+01   1.706  0.09011 .  
+## peakrpm           2.349e+00  7.014e-01   3.349  0.00103 ** 
+## citympg          -2.659e+02  1.930e+02  -1.377  0.17049    
+## highwaympg        1.556e+02  1.700e+02   0.915  0.36146    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2922 on 146 degrees of freedom
+## Multiple R-squared:  0.876,  Adjusted R-squared:  0.8641 
+## F-statistic: 73.69 on 14 and 146 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div id="comment" class="section level2">
+<h2>comment</h2>
+<p>varImp in the caret package shows the absolute value of the
+t-statistic for each model parameter is used in the linear regression
+model. High t value means more predictive power of variable. Based on
+the results of varImp, enginesize is the leading predictor for car
+price.</p>
+<pre class="r"><code>anova(linear_mod,linear_mod2,test=&quot;Chisq&quot;)</code></pre>
+<pre><code>## Analysis of Variance Table
+## 
+## Model 1: price ~ symboling + wheelbase + carlength + carwidth + carheight + 
+##     curbweight + enginesize + boreratio + stroke + compressionratio + 
+##     horsepower + peakrpm + citympg + highwaympg
+## Model 2: price ~ peakrpm + compressionratio + stroke + enginesize + carlength + 
+##     wheelbase
+##   Res.Df        RSS Df Sum of Sq  Pr(&gt;Chi)    
+## 1    146 1246785320                           
+## 2    154 1501783948 -8 -2.55e+08 0.0002237 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre class="r"><code>numeric_test_noy &lt;- select(numeric_test,-price)
+linear_predict &lt;- predict(linear_mod, numeric_test_noy)</code></pre>
+<pre class="r"><code>#define calculation of r-squared and mape
+RSQUARE = function(y_actual,y_predict){
+  cor(y_actual,y_predict)^2
+}
+
+MAPE = function(y_actual,y_predict){
+  mean(abs((y_actual-y_predict)/y_actual))*100
+}</code></pre>
+<pre class="r"><code>LR_MAPE = MAPE(numeric_test$price,linear_predict) # Using MAPE error metrics to check for the error rate and accuracy level
+LR_R = RSQUARE(numeric_test$price,linear_predict) # Using R-SQUARE error metrics to check for the error rate and accuracy level
+Accuracy_Linear = 100 - LR_MAPE</code></pre>
+<pre class="r"><code>LR_R</code></pre>
+<pre><code>## [1] 0.7599878</code></pre>
+<pre class="r"><code>LR_MAPE</code></pre>
+<pre><code>## [1] 20.31741</code></pre>
+<pre class="r"><code>Accuracy_Linear</code></pre>
+<pre><code>## [1] 79.68259</code></pre>
+<pre class="r"><code>sqrt(mean((linear_predict - numeric_test$price)^2,na.rm = TRUE))</code></pre>
+<pre><code>## [1] 4179.324</code></pre>
+</div>
+<div id="comment-1" class="section level2">
+<h2>comment</h2>
+<p>linear regression may experience some overfitting problem.</p>
+<pre class="r"><code># multicollinearity
+vif_values &lt;- vif(linear_mod)
+barplot(vif_values, main = &quot;VIF Values&quot;, horiz = TRUE, col = &quot;steelblue&quot;,las=2)
+abline(v = 5, lwd = 3, lty = 2)</code></pre>
+<p><img src="final-project_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+</div>
+<div id="comment-2" class="section level2">
+<h2>comment</h2>
+<p>8 variables have VIF &gt; 5. A value greater than 5 indicates
+potentially severe correlation between a given predictor variable and
+other predictor variables in the model. In this case, the coefficient
+estimates and p-values in the regression output are likely unreliable.
+To improve the reliability and the performance. Lasso is used.</p>
+<pre class="r"><code>#lasso
+numeric_train_noy &lt;- select(numeric_train,-price)
+cv_model &lt;- cv.glmnet(as.matrix(numeric_train_noy), numeric_train$price, alpha = 1)</code></pre>
+<pre class="r"><code>best_lambda &lt;- cv_model$lambda.min
+best_lambda</code></pre>
+<pre><code>## [1] 60.68009</code></pre>
+<pre class="r"><code>plot(cv_model) </code></pre>
+<p><img src="final-project_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<pre class="r"><code>best_model &lt;- glmnet(numeric_train_noy, numeric_train$price, alpha = 1, lambda = best_lambda)</code></pre>
+<pre class="r"><code>y_predicted &lt;- predict(best_model, s = best_lambda, newx = as.matrix(numeric_train_noy))</code></pre>
+<pre class="r"><code>sst &lt;- sum((numeric_train$price - mean(numeric_train$price))^2)
+sse &lt;- sum((y_predicted - numeric_train$price)^2)
+rsq &lt;- 1 - sse/sst
+rsq</code></pre>
+<pre><code>## [1] 0.8731981</code></pre>
+<pre class="r"><code># on testing dataset
+y_predicted_test &lt;- predict(best_model, s = best_lambda, newx = as.matrix(numeric_test_noy))
+sst2 &lt;- sum((numeric_test$price - mean(numeric_test$price))^2)
+sse2 &lt;- sum((y_predicted_test - numeric_test$price)^2)
+rsq2 &lt;- 1 - sse2/sst2
+rsq2</code></pre>
+<pre><code>## [1] 0.7494684</code></pre>
+</div>
+<div id="comment-3" class="section level2">
+<h2>comment</h2>
+<p>it is noticed that the r-squared on testing dataset and training
+dataset are very closed to each other. This indicates the over-fitting
+problem is resolved by lasso regressor.</p>
+<pre class="r"><code>#random forest
+rf_fit &lt;- randomForest(price~., data = numeric_train) </code></pre>
+<pre class="r"><code>rf_fit</code></pre>
+<pre><code>## 
+## Call:
+##  randomForest(formula = price ~ ., data = numeric_train) 
+##                Type of random forest: regression
+##                      Number of trees: 500
+## No. of variables tried at each split: 4
+## 
+##           Mean of squared residuals: 4350563
+##                     % Var explained: 93.03</code></pre>
+<pre class="r"><code>plot(rf_fit)</code></pre>
+<p><img src="final-project_files/figure-html/unnamed-chunk-33-1.png" width="672" />
+## comment based on the plot, as the number of tree increases to 100,
+the error decreases and tends to be stable. This means the accuracy of
+random forest model increases.</p>
+<pre class="r"><code>rf_predict &lt;- predict(rf_fit, numeric_test_noy)</code></pre>
+<pre class="r"><code>sst3 &lt;- sum((numeric_test$price - mean(numeric_test$price))^2)
+sse3 &lt;- sum((rf_predict - numeric_test$price)^2)
+rsq3 &lt;- 1 - sse3/sst3
+rsq3</code></pre>
+<pre><code>## [1] 0.9226796</code></pre>
+<pre class="r"><code>varImpPlot(rf_fit) </code></pre>
+<p><img src="final-project_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+</div>
+<div id="comment-4" class="section level2">
+<h2>comment</h2>
+<p>the r-squared is very consistent on testing dataset and training
+dataset. This indicates no overfitting problem. IncNodePurity is a
+metric of variable weight based on the Gini impurity index, which is
+used to compute tree splits. The more significant a variable is to our
+model, the greater its mean decrease accuracy or mean decrease gini
+score. Based on the IncNodePurity, enginesize, curbweight, and
+horsepower are the leading variables for random forest model.</p>
+<pre class="r"><code>#regression trees
+tree_fit &lt;- rpart(price~., data = numeric_train) </code></pre>
+<pre class="r"><code>plot(tree_fit, margin = 0.1)
+text(tree_fit, cex = 0.75)</code></pre>
+<p><img src="final-project_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<pre class="r"><code>tree_predict &lt;- predict(tree_fit,numeric_test_noy)
+sst4 &lt;- sum((numeric_test$price - mean(numeric_test$price))^2)
+sse4 &lt;- sum((tree_predict - numeric_test$price)^2)
+rsq4 &lt;- 1 - sse4/sst4
+rsq4</code></pre>
+<pre><code>## [1] 0.8984322</code></pre>
+<pre class="r"><code>tree_predict2 &lt;- predict(tree_fit,numeric_train_noy)
+sst5 &lt;- sum((numeric_train$price - mean(numeric_train$price))^2)
+sse5 &lt;- sum((tree_predict2 - numeric_train$price)^2)
+rsq5 &lt;- 1 - sse5/sst5
+rsq5</code></pre>
+<pre><code>## [1] 0.892533</code></pre>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

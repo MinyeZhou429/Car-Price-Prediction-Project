@@ -1,0 +1,17 @@
+name: "BST260 Final Project: Car Price Prediction Models"
+output_dir: "."
+navbar:
+  title: "BST260 Final Project: Car Price Prediction Models"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Introduction"
+      href: intro.html
+    - text: "Method"
+      href: method.html
+    - text: "Result"
+      href: result.html
+    - text: "Discussion"
+      href: discussion.html
+    - text: "Reference"
+      href: reference.html

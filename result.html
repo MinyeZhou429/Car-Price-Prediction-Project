@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>result.knit</title>
+
+<script src="site_libs/header-attrs-2.18/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">BST260 Final Project: Car Price Prediction Models</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="intro.html">Introduction</a>
+</li>
+<li>
+  <a href="method.html">Method</a>
+</li>
+<li>
+  <a href="result.html">Result</a>
+</li>
+<li>
+  <a href="discussion.html">Discussion</a>
+</li>
+<li>
+  <a href="reference.html">Reference</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+
+</div>
+
+
+<div id="linear-regression" class="section level3">
+<h3>Linear Regression</h3>
+<p>Based on model summary and variable importance:</p>
+<ul>
+<li>Six covariates are statistically significant at 0.05 significance
+level</li>
+<li>Three variables have negative impact on the car price</li>
+<li>Eleven variables have positive impact on the car price</li>
+<li>Enginesize is the leading predictor for car price</li>
+</ul>
+<p><img
+src="lmimportance.png" /></p>
+<p>Multicollinearity was checked by performing Variance Inflation Factor
+(VIF). Among fourteen VIF values, eight values are larger than 5, which
+means that eight variable exhibits correlation with other variables in
+the dataset.</p>
+<p><img
+src="multi.png" /></p>
+<p>The calculated R-square are:</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>R-square</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Training set</td>
+<td>0.8462</td>
+</tr>
+<tr class="even">
+<td>Testing set</td>
+<td>0.8143</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="lasso-regression" class="section level3">
+<h3>LASSO Regression</h3>
+<p><em>10-fold Cross Validation model</em> shows minimum lambda is
+31.73. <img
+src="cv.png" /></p>
+<p>Using the most optimal lambda as the parameter for LASSO regression,
+a model was fitted. The calculated R-square are:</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>R-square</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Training set</td>
+<td>0.8577</td>
+</tr>
+<tr class="even">
+<td>Testing set</td>
+<td>0.8065</td>
+</tr>
+</tbody>
+</table>
+<p>It is noticed that the difference between R-square on testing set and
+training set is larger than that of linear regression. This indicates
+that LASSO regression model may lack generalizability and exhibit more
+overfitting issue compared to the linear regression model.</p>
+</div>
+<div id="random-forest" class="section level3">
+<h3>Random Forest</h3>
+<p>A Random Forest model was fitted on the dataset. Based on the plot
+below, as the number of trees increases to 100, the error decreases and
+tends to be stable.</p>
+<p><img
+src="rf1.png" /></p>
+<p>The calculated R-square are:</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>R-square</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Training set</td>
+<td>0.9226</td>
+</tr>
+<tr class="even">
+<td>Testing set</td>
+<td>0.9333</td>
+</tr>
+</tbody>
+</table>
+<p>There is no big difference between the R-square on training set and
+R-square on testing set. The small difference indicates there is no
+over-fitting issue on random forest model.</p>
+<p>Based on the IncNodePurity values, enginesize, curbweight, and
+horsepower are the most significant variables for the Random Forest
+model.</p>
+<p><img
+src="rf2.png" /></p>
+</div>
+<div id="regression-tree" class="section level3">
+<h3>Regression Tree</h3>
+<p>A regression tree was fitted to see whether better performance could
+be obtained. Here is the visualization of Regression tree: <img
+src="tree.png" /></p>
+<p>Based on the plot, first split occurred based on enginesize. The
+second split occurred based on curbweight. And the third split occurred
+based on curbweight and carwidth. The splits indicate that the most
+significant predictors in regression trees are enginesize, curbweight,
+and carwidth.</p>
+<p>The calculated R-square are:</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>R-square</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Training set</td>
+<td>0.90</td>
+</tr>
+<tr class="even">
+<td>Testing set</td>
+<td>0.84</td>
+</tr>
+</tbody>
+</table>
+<p>The difference is not very large, which indicated there is no
+dramatic overfitting issues.</p>
+</div>
+<div id="model-comparison" class="section level3">
+<h3>Model Comparison</h3>
+<ul>
+<li>Random Forest model has the largest R-square, which indicates that
+Random Forest model has the best performance among all models.</li>
+<li>Random Forest model has the smallest difference in R-square between
+training set and testing set. The small R-square difference shows that
+Random Forest model has the best generalizability.</li>
+<li>Parametric methods have lower R-square than non-parametric
+methods.</li>
+</ul>
+<p><img
+src="comp.png" /></p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

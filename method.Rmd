@@ -1,0 +1,16 @@
+### Cross Validation
+
+-   K-fold Validation
+-   Data Splitting
+
+### Modeling
+
+*Parametric*
+
+-   Linear Regression
+-   LASSO Regression
+
+*Non-Parametric*
+
+-   Random Forest
+-   Regression Tree
