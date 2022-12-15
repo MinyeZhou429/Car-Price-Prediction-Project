@@ -89,5 +89,11 @@ Based on model summary and variable importance:
 
 Multicollinearity was checked by performing Variance Inflation Factor (VIF). Among fourteen VIF values, eight values are larger than 5, which means that eight variable exhibits correlation with other variables in the dataset.
 
-![VIF](https://github.com/MinyeZhou429/MinyeZhou429.github.io/blob/main/截屏2022-12-14%20下午2.48.56.png)
+![VIF](https://github.com/MinyeZhou429/MinyeZhou429.github.io/blob/main/截屏2022-12-14%20下午3.13.40.png)
+
+### LASSO Regression
+
+10-fold Cross Validation model shows minimum lambda is 31.73.
+![VIF](https://github.com/MinyeZhou429/MinyeZhou429.github.io/blob/main/截屏2022-12-14%20下午3.13.40.png)
+
 
