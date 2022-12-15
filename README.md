@@ -107,4 +107,17 @@ It is noticed that the difference between R-square on testing set and training s
 
 ### Random Forest
 
+A Random Forest model was fitted on the dataset. Based on the plot below, as the number of trees increases to 100, the error decreases and tends to be stable. 
 
+![RF](https://github.com/MinyeZhou429/MinyeZhou429.github.io/blob/main/截屏2022-12-14%20下午3.22.36.png)
+
+The calculated R-square are:
+|  | R-square |
+| ------ | ------- |
+| Training set | 0.9226 |
+| Testing set | 0.9333 |
+
+There is no big difference between the R-square on training set and R-square on testing set. The small difference indicates there is no over-fitting issue on random forest model.
+
+Based on the IncNodePurity values, enginesize, curbweight, and horsepower are the most significant variables for the Random Forest model.
+![RF_importance](https://github.com/MinyeZhou429/MinyeZhou429.github.io/blob/main/截屏2022-12-14%20下午3.22.36.png)
