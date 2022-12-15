@@ -41,7 +41,7 @@ There is no missing value in the dataset
 
 ### Correlation Analysis
 
-![](plot1.png)
+![](https://github.com/MinyeZhou429/MinyeZhou429.github.io/blob/main/plot1.png)
 
 It is noticed that among numeric variables:
 
