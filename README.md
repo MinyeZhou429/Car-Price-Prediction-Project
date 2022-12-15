@@ -40,5 +40,5 @@ The covariates used in the study are:
 
 ### Correlation Analysis
 
-![alt text](/Users/yeye/Desktop/截屏2022-12-14\ 下午2.28.37.png)
+![alt text](截屏2022-12-14 下午2.28.37.png)
 
