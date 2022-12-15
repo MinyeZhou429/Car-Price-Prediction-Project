@@ -76,10 +76,18 @@ It is noticed that among numeric variables:
 
 ### Linear Regresson
 
+Based on model summary and variable importance:
+
 - Six covariates are statistically significant at 0.05 significance level
 - Three variables have negative impact on the car price
 - Twelve variables have positive impact on the car price
-- Adjusted R-squared for the model is 0.8462
+- Adjusted R-squared for the model is 0.8462 on training set
+- Adjusted R-squared for the model is 0.8143 on testing set
+- Enginesize is the leading predictor for car price
 
-![LM](https://github.com/MinyeZhou429/MinyeZhou429.github.io/blob/main/截屏2022-12-14%20下午2.45.30.png)
+![LM](https://github.com/MinyeZhou429/MinyeZhou429.github.io/blob/main/截屏2022-12-14%20下午2.48.56.png)
+
+Multicollinearity was checked by performing Variance Inflation Factor (VIF). Among fourteen VIF values, eight values are larger than 5, which means that eight variable exhibits correlation with other variables in the dataset.
+
+![VIF](https://github.com/MinyeZhou429/MinyeZhou429.github.io/blob/main/截屏2022-12-14%20下午2.48.56.png)
 
