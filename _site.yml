@@ -15,3 +15,7 @@ navbar:
       href: discussion.html
     - text: "Reference"
       href: reference.html
+output:
+  html_document:
+    theme: flatly
+    css: style.css
