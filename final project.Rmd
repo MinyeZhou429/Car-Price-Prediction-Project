@@ -1,0 +1,277 @@
+---
+title: "Project"
+output: html_document
+date: "2022-12-09"
+---
+
+```{r ref.label=knitr::all_labels(), echo=TRUE, eval=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+```{r}
+library(car)
+library(readr)
+library(reshape2)
+library(ggplot2)
+library(caret)
+library(car)
+library(MLmetrics)
+library(glmnet)
+library(rpart)
+library(randomForest)
+library(tidyverse)
+library(dplyr)
+```
+
+
+##load data
+```{r}
+CarPrice<- read_csv("/Users/yeye/Desktop/FALL22/BST260/archive/CarPrice_Assignment.csv")
+CarPrice <- select(CarPrice,-car_ID)
+```
+```{r}
+#check missingness
+sapply(CarPrice, function(x) sum(is.na(x)))
+```
+```{r ref.label=knitr::all_labels(), echo=TRUE, eval=FALSE}
+#check distribution of car price
+summary(CarPrice$price)
+```
+
+```{r}
+#check variable type
+sapply(CarPrice, class)
+```
+
+```{r}
+#get all numeric columns
+num_cols <- unlist(lapply(CarPrice, is.numeric)) 
+numeric_data <- CarPrice[ , num_cols] 
+```
+
+
+```{r}
+#heatmap for numeric variables
+corr_mat <- round(cor(numeric_data),2) 
+melted_cormat <- melt(corr_mat)
+head(melted_cormat)
+```
+```{r}
+#heatmap for all numeric variables
+ggplot(data = melted_cormat, aes(x=Var1, y=Var2, fill=value)) + 
+  geom_tile()+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  geom_text(aes(Var2, Var1, label = value), color = "black", size = 2)
+```
+## comment
+It is noticed that among numeric variables:
+wheelbase have positive correlation with price of 58%.
+car length and car width have positive correlation with price of 68% and 76%.
+curbweight have positive correlation with price of 84%.
+enginesize have positive correlation with price of 87%.
+boreratio have positive correlation with price of 55%.
+horsepower have positive correlation with price of 81%.
+citympg and highwaympg have negative correlation with price of 69% and 70%.
+
+```{r}
+summary(CarPrice$price)
+```
+
+
+```{r}
+x <- select(CarPrice,-price)
+y <- select(CarPrice,price)
+```
+
+
+```{r}
+#splitting dataset
+test_index <- createDataPartition(CarPrice$price, times = 1, p = 0.2, list = FALSE)
+train_x <- x[-test_index,]
+train_y <- y[-test_index,]
+test_x <- x[test_index,]
+test_y <- y[test_index,]
+
+test_all <- CarPrice[test_index,]
+train_all <- CarPrice[-test_index,]
+```
+
+```{r}
+#linear regression for all numerical variables
+numeric_train <- train_all[ , num_cols] 
+numeric_test <- test_all[ , num_cols] 
+linear_mod <- lm(price ~ ., data = numeric_train)
+summary(linear_mod)
+```
+
+```{r}
+linear_imp <- varImp(linear_mod, scale = FALSE)
+```
+
+```{r}
+# model tune
+linear_mod2 <- lm(price ~ peakrpm + compressionratio + stroke + enginesize + carlength + wheelbase, data = numeric_train)
+summary(linear_mod)
+```
+
+## comment
+varImp in the caret package shows the absolute value of the t-statistic for each model parameter is used in the linear regression model. High t value means more predictive power of variable. Based on the results of varImp, enginesize is the leading predictor for car price.
+
+```{r}
+anova(linear_mod,linear_mod2,test="Chisq")
+```
+
+
+```{r}
+numeric_test_noy <- select(numeric_test,-price)
+linear_predict <- predict(linear_mod, numeric_test_noy)
+```
+
+```{r}
+#define calculation of r-squared and mape
+RSQUARE = function(y_actual,y_predict){
+  cor(y_actual,y_predict)^2
+}
+
+MAPE = function(y_actual,y_predict){
+  mean(abs((y_actual-y_predict)/y_actual))*100
+}
+```
+
+
+```{r}
+LR_MAPE = MAPE(numeric_test$price,linear_predict) # Using MAPE error metrics to check for the error rate and accuracy level
+LR_R = RSQUARE(numeric_test$price,linear_predict) # Using R-SQUARE error metrics to check for the error rate and accuracy level
+Accuracy_Linear = 100 - LR_MAPE
+```
+
+```{r}
+LR_R
+LR_MAPE
+```
+
+```{r}
+Accuracy_Linear
+```
+
+
+```{r}
+sqrt(mean((linear_predict - numeric_test$price)^2,na.rm = TRUE))
+```
+
+## comment 
+linear regression may experience some overfitting problem.
+
+```{r}
+# multicollinearity
+vif_values <- vif(linear_mod)
+barplot(vif_values, main = "VIF Values", horiz = TRUE, col = "steelblue",las=2)
+abline(v = 5, lwd = 3, lty = 2)
+```
+
+## comment
+8 variables have VIF > 5. A value greater than 5 indicates potentially severe correlation between a given predictor variable and other predictor variables in the model. In this case, the coefficient estimates and p-values in the regression output are likely unreliable. To improve the reliability and the performance. Lasso is used.
+
+```{r}
+#lasso
+numeric_train_noy <- select(numeric_train,-price)
+cv_model <- cv.glmnet(as.matrix(numeric_train_noy), numeric_train$price, alpha = 1)
+```
+
+```{r}
+best_lambda <- cv_model$lambda.min
+best_lambda
+```
+
+```{r}
+plot(cv_model) 
+```
+```{r}
+best_model <- glmnet(numeric_train_noy, numeric_train$price, alpha = 1, lambda = best_lambda)
+```
+
+```{r}
+y_predicted <- predict(best_model, s = best_lambda, newx = as.matrix(numeric_train_noy))
+```
+
+```{r}
+sst <- sum((numeric_train$price - mean(numeric_train$price))^2)
+sse <- sum((y_predicted - numeric_train$price)^2)
+rsq <- 1 - sse/sst
+rsq
+```
+
+```{r}
+# on testing dataset
+y_predicted_test <- predict(best_model, s = best_lambda, newx = as.matrix(numeric_test_noy))
+sst2 <- sum((numeric_test$price - mean(numeric_test$price))^2)
+sse2 <- sum((y_predicted_test - numeric_test$price)^2)
+rsq2 <- 1 - sse2/sst2
+rsq2
+```
+
+## comment 
+it is noticed that the r-squared on testing dataset and training dataset are very closed to each other. This indicates the over-fitting problem is resolved by lasso regressor.
+
+```{r}
+#random forest
+rf_fit <- randomForest(price~., data = numeric_train) 
+```
+
+```{r}
+rf_fit
+```
+
+
+```{r}
+plot(rf_fit)
+```
+## comment
+based on the plot, as the number of tree increases to 100, the error decreases and tends to be stable. This means the accuracy of random forest model increases.
+
+```{r}
+rf_predict <- predict(rf_fit, numeric_test_noy)
+
+```
+
+```{r}
+sst3 <- sum((numeric_test$price - mean(numeric_test$price))^2)
+sse3 <- sum((rf_predict - numeric_test$price)^2)
+rsq3 <- 1 - sse3/sst3
+rsq3
+```
+
+```{r}
+varImpPlot(rf_fit) 
+```
+
+
+## comment
+the r-squared is very consistent on testing dataset and training dataset. This indicates no overfitting problem. IncNodePurity is a metric of variable weight based on the Gini impurity index, which is used to compute tree splits. The more significant a variable is to our model, the greater its mean decrease accuracy or mean decrease gini score. Based on the IncNodePurity, enginesize, curbweight, and horsepower are the leading variables for random forest model.
+
+```{r}
+#regression trees
+tree_fit <- rpart(price~., data = numeric_train) 
+```
+
+```{r}
+plot(tree_fit, margin = 0.1)
+text(tree_fit, cex = 0.75)
+```
+```{r}
+tree_predict <- predict(tree_fit,numeric_test_noy)
+sst4 <- sum((numeric_test$price - mean(numeric_test$price))^2)
+sse4 <- sum((tree_predict - numeric_test$price)^2)
+rsq4 <- 1 - sse4/sst4
+rsq4
+```
+
+```{r}
+tree_predict2 <- predict(tree_fit,numeric_train_noy)
+sst5 <- sum((numeric_train$price - mean(numeric_train$price))^2)
+sse5 <- sum((tree_predict2 - numeric_train$price)^2)
+rsq5 <- 1 - sse5/sst5
+rsq5
+```
+
