@@ -7,11 +7,11 @@ Based on model summary and variable importance:
 -   Eleven variables have positive impact on the car price
 -   Enginesize is the leading predictor for car price
 
-![](/Users/yeye/Desktop/FALL22/BST260/MinyeZhou429.github.io/lmimportance.png)
+![](lmimportance.png)
 
 Multicollinearity was checked by performing Variance Inflation Factor (VIF). Among fourteen VIF values, eight values are larger than 5, which means that eight variable exhibits correlation with other variables in the dataset.
 
-![](/Users/yeye/Desktop/FALL22/BST260/MinyeZhou429.github.io/multi.png)
+![](multi.png)
 
 The calculated R-square are:
 
@@ -37,7 +37,7 @@ It is noticed that the difference between R-square on testing set and training s
 
 A Random Forest model was fitted on the dataset. Based on the plot below, as the number of trees increases to 100, the error decreases and tends to be stable.
 
-![](/Users/yeye/Desktop/FALL22/BST260/MinyeZhou429.github.io/rf1.png)
+![](rf1.png)
 
 The calculated R-square are:
 
@@ -50,11 +50,11 @@ There is no big difference between the R-square on training set and R-square on 
 
 Based on the IncNodePurity values, enginesize, curbweight, and horsepower are the most significant variables for the Random Forest model.
 
-![](/Users/yeye/Desktop/FALL22/BST260/MinyeZhou429.github.io/rf2.png)
+![](rf2.png)
 
 ### Regression Tree
 
-A regression tree was fitted to see whether better performance could be obtained. Here is the visualization of Regression tree: ![](/Users/yeye/Desktop/FALL22/BST260/MinyeZhou429.github.io/tree.png)
+A regression tree was fitted to see whether better performance could be obtained. Here is the visualization of Regression tree: ![](tree.png)
 
 Based on the plot, first split occurred based on enginesize. The second split occurred based on curbweight. And the third split occurred based on curbweight and carwidth. The splits indicate that the most significant predictors in regression trees are enginesize, curbweight, and carwidth.
 
@@ -73,4 +73,4 @@ The difference is not very large, which indicated there is no dramatic overfitti
 -   Random Forest model has the smallest difference in R-square between training set and testing set. The small R-square difference shows that Random Forest model has the best generalizability.
 -   Parametric methods have lower R-square than non-parametric methods.
 
-![](/Users/yeye/Desktop/FALL22/BST260/MinyeZhou429.github.io/comp.png)
+![](comp.png)
