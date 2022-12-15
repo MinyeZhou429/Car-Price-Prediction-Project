@@ -141,6 +141,15 @@ The calculated R-square are:
 
 The difference is not very large, which indicated there is no dramatic overfitting issues.
 
+### Model Comparison
+
+- Random Forest model has the largest R-square, which indicates that Random Forest model has the best performance among all models. 
+- Random Forest model has the smallest difference in R-square between training set and testing set. The small R-square difference shows that Random Forest model has the best generalizability. 
+- Parametric methods have lower R-square than non-parametric methods.
+
+![tree](https://github.com/MinyeZhou429/MinyeZhou429.github.io/blob/main/截屏2022-12-14%20下午8.20.34.png)
+
+
 ## Discussion
 
 ### Main Finding
