@@ -80,7 +80,7 @@ Based on model summary and variable importance:
 
 - Six covariates are statistically significant at 0.05 significance level
 - Three variables have negative impact on the car price
-- Twelve variables have positive impact on the car price
+- Eleven variables have positive impact on the car price
 - Enginesize is the leading predictor for car price
 
 ![LM_importance](https://github.com/MinyeZhou429/MinyeZhou429.github.io/blob/main/截屏2022-12-14%20下午2.48.56.png)
