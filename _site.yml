@@ -1,5 +1,5 @@
 name: "BST260 Final Project: Car Price Prediction Models"
-output_dir: "."
+output_dir: "docs"
 navbar:
   title: "BST260 Final Project: Car Price Prediction Models"
   left:
