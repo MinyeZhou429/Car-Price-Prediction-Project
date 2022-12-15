@@ -93,7 +93,18 @@ Multicollinearity was checked by performing Variance Inflation Factor (VIF). Amo
 
 ### LASSO Regression
 
-10-fold Cross Validation model shows minimum lambda is 31.73.
-![VIF](https://github.com/MinyeZhou429/MinyeZhou429.github.io/blob/main/截屏2022-12-14%20下午3.13.40.png)
+*10-fold Cross Validation model* shows minimum lambda is 31.73.
+![VIF](https://github.com/MinyeZhou429/MinyeZhou429.github.io/blob/main/截屏2022-12-14%20下午3.15.36.png)
+
+Using the most optimal lambda as the parameter for LASSO regression, a model was fitted. The calculated R-square are:
+
+|  | R-square |
+| ------ | ------- |
+| Training set | 0.8577 |
+| Testing set | 0.8065 |
+
+It is noticed that the difference between R-square on testing set and training set is larger than that of linear regression. This indicates that LASSO regression model may lack generalizability and exhibits more overfitting issue compared to the linear regression model.
+
+### Random Forest
 
 
