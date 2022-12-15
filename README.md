@@ -32,13 +32,49 @@ The covariates used in the study are:
 | citympg | Mileage in city (Numeric) |
 | highwaympg | Mileage on highway (Numeric) |
 
+### Missing Value
+
+There is no missing value in the dataset
+
+### Correlation Analysis
+
+![Heat map for correlation](https://github.com/MinyeZhou429/MinyeZhou429.github.io/blob/main/截屏2022-12-14%20下午2.28.37.png)
+
+It is noticed that among numeric variables:
+- wheelbase has positive correlation with price of 58%.
+- car length and car width have positive correlation with price of 68% and 76%.
+- curbweight has positive correlation with price of 84%.
+- enginesize has positive correlation with price of 87%.
+- boreratio has positive correlation with price of 55%.
+- horsepower has positive correlation with price of 81%.
+- citympg and highwaympg have negative correlation with price of 69% and 70%.
+
 ### Goal
 
 - Find powerful predictors of car price
 - Construct accurate prediction models for car price
 - Compare model performance
 
-### Correlation Analysis
+## Method
 
-![alt text](/Users/yeye/Desktop/截屏2022-12-14 下午3.26.44.png)
+### Cross Validation
+
+- K-fold Validation
+- Data Splitting
+
+### Modeling
+
+*Parametric*
+- Linear Regression
+- LASSO Regression
+
+*Non-Parametric*
+- Random Forest
+- Regression Tree
+
+## Result
+
+### Linear Regresson
+
+![Heat map for correlation](https://github.com/MinyeZhou429/MinyeZhou429.github.io/blob/main/截屏2022-12-14%20下午2.28.37.png)
 
