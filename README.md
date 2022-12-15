@@ -90,6 +90,7 @@ Multicollinearity was checked by performing Variance Inflation Factor (VIF). Amo
 ![VIF](https://github.com/MinyeZhou429/MinyeZhou429.github.io/blob/main/截屏2022-12-14%20下午3.13.40.png)
 
 The calculated R-square are:
+
 |  | R-square |
 | ------ | ------- |
 | Training set | 0.8462 |
@@ -116,6 +117,7 @@ A Random Forest model was fitted on the dataset. Based on the plot below, as the
 ![RF](https://github.com/MinyeZhou429/MinyeZhou429.github.io/blob/main/截屏2022-12-14%20下午3.22.36.png)
 
 The calculated R-square are:
+
 |  | R-square |
 | ------ | ------- |
 | Training set | 0.9226 |
@@ -134,6 +136,7 @@ A regression tree was fitted to see whether better performance could be obtained
 Based on the plot, first split occurred based on enginesize. The second split occurred based on curbweight. And the third split occurred based on curbweight and carwidth. The splits indicate that the most significant predictors in regression trees are enginesize, curbweight, and carwidth. 
 
 The calculated R-square are:
+
 |  | R-square |
 | ------ | ------- |
 | Training set | 0.90 |
